@@ -1,0 +1,20 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .btnContainer {
+      display: flex;
+      gap: 1rem;
+
+      .button {
+        width: 96px;
+      }
+    }
+  }
+}

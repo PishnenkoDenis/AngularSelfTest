@@ -1,0 +1,58 @@
+<h2 class="title">Добавить сотрудника</h2>
+<div class="formContainer">
+  <form class="form" [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Фамилия</mat-label>
+      <input type="text" matInput formControlName="lastName" />
+      <mat-error
+        *ngIf="
+          userForm.get('lastName')?.dirty &&
+          userForm.get('lastName')?.hasError('required')
+        "
+      >
+        Это обязательное поле
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Имя</mat-label>
+      <input type="text" matInput formControlName="firstName" />
+      <mat-error
+        *ngIf="
+          userForm.get('firstName')?.dirty &&
+          userForm.get('firstName')?.hasError('required')
+        "
+      >
+        Это обязательное поле
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Возраст</mat-label>
+      <input type="number" matInput formControlName="age" />
+      <mat-error
+        *ngIf="
+          userForm.get('age')?.dirty &&
+          userForm.get('age')?.hasError('required')
+        "
+      >
+        Это обязательное поле
+      </mat-error>
+    </mat-form-field>
+    <div class="btnContainer">
+      <button mat-flat-button class="button" type="submit" color="primary">
+        <span>ADD</span>
+      </button>
+      <button
+        mat-flat-button
+        class="button"
+        type="button"
+        color="warn"
+        (click)="onReset()"
+      >
+        <span>RESET</span>
+      </button>
+    </div>
+  </form>
+  <h3 class="userAdd" *ngIf="user">
+    User {{ user.firstName }} {{ user.lastName }} was successfully added
+  </h3>
+</div>
