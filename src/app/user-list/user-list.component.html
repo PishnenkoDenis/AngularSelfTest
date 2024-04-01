@@ -7,4 +7,4 @@
   ></app-user-card>
 </div>
 <h4 class="empty" *ngIf="users && !users?.length">There is no users yet</h4>
-<h4 class="empty" *ngIf="isError">This operation completed with error</h4>
+<app-error *ngIf="isError" [error]="errorText"></app-error>

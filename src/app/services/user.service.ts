@@ -12,22 +12,31 @@ export class UserService {
   $users: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   $user: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   users: IUser[] = [];
+  $error: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   addUser(user: any) {
     return this.httpClient
       .post(`${environment.BASE_URL}/users/add`, user)
-      .subscribe((res: any) => {
-        this.$user.next(res);
-      });
+      .subscribe(
+        (res: any) => {
+          this.$user.next(res);
+        },
+        (err) => {
+          this.$error.next(err.message);
+        }
+      );
   }
 
   getAllUsers() {
-    this.httpClient
-      .get(`${environment.BASE_URL}/users`)
-      .subscribe((res: any) => {
+    this.httpClient.get(`${environment.BASE_URL}/users`).subscribe(
+      (res: any) => {
         this.$users.next(res.users);
         this.users = res.users;
-      });
+      },
+      (err) => {
+        this.$error.next(err.message);
+      }
+    );
   }
 
   removeUser(id: number) {

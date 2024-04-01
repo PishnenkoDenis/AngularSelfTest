@@ -12,14 +12,18 @@ export class UserListComponent implements OnInit, OnDestroy {
   users: IUser[] = [];
   unsubscriber$ = new Subject<void>();
   isError = false;
+  errorText = '';
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.getAllUsers();
     this.userService.$users.pipe(takeUntil(this.unsubscriber$)).subscribe(
       (value) => (this.users = value),
-      (err) => {
+      () => {
         this.isError = true;
+        this.userService.$error
+          .pipe(takeUntil(this.unsubscriber$))
+          .subscribe((err) => (this.errorText = err));
       }
     );
   }
