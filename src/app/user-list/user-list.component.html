@@ -1,1 +1,10 @@
-<p>user-list works!</p>
+<h3 class="title">Users List</h3>
+<div class="content" *ngFor="let user of users; let idx = index">
+  <app-user-card
+    [user]="user"
+    [index]="idx + 1"
+    (removeUser)="onRemoveUser($event)"
+  ></app-user-card>
+</div>
+<h4 class="empty" *ngIf="users && !users?.length">There is no users yet</h4>
+<h4 class="empty" *ngIf="isError">This operation completed with error</h4>

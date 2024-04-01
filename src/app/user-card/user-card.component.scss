@@ -1,0 +1,24 @@
+.card {
+  padding: 25px 0;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .row {
+    display: flex;
+  }
+
+  .cell {
+    flex: 1;
+  }
+}
+
+.button {
+  margin-top: 25px;
+  span {
+    color: white;
+  }
+}

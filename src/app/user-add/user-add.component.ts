@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Subject, takeUntil } from 'rxjs';
 
-interface IUser {
-  firstName: string;
-  lastName: string;
-  age: number;
+export interface IUser {
+  id: number;
+  firstName?: string;
+  lastName?: string;
+  age?: number;
 }
 
 @Component({
@@ -18,6 +19,7 @@ export class UserAddComponent implements OnInit, OnDestroy {
   userForm: FormGroup;
   user: IUser | null = null;
   private unsubscriber$ = new Subject<void>();
+
   constructor(private form: FormBuilder, private userService: UserService) {
     this.userForm = this.form.group({
       lastName: ['', [Validators.required]],
@@ -33,7 +35,10 @@ export class UserAddComponent implements OnInit, OnDestroy {
       this.userService.addUser(this.userForm.value);
       this.userService.$user
         .pipe(takeUntil(this.unsubscriber$))
-        .subscribe((value: any) => (this.user = value));
+        .subscribe((value: any) => {
+          this.user = value;
+          console.log(value);
+        });
     }
   }
 

@@ -1,1 +1,29 @@
-<p>user-card works!</p>
+<div class="card">
+  <div class="table">
+    <div class="row">
+      <div>Сотрудник № {{ index }}</div>
+    </div>
+    <div class="row">
+      <div class="cell">Фамилия</div>
+      <div class="cell">{{ user.lastName || "..." }}</div>
+    </div>
+    <div class="row">
+      <div class="cell">Имя</div>
+      <div class="cell">{{ user.firstName || "..." }}</div>
+    </div>
+    <div class="row">
+      <div class="cell">Возраст</div>
+      <div class="cell">{{ user.age || null }}</div>
+    </div>
+  </div>
+
+  <button
+    mat-flat-button
+    class="button"
+    type="button"
+    color="primary"
+    (click)="remove(user.id)"
+  >
+    <span>УДАЛИТЬ СОТРУДНИКА</span>
+  </button>
+</div>
